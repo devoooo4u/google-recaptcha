@@ -1,0 +1,37 @@
+<html>
+  <head>
+    <title>Google recaptcha using Node.js</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src='https://www.google.com/recaptcha/api.js' async defer></script>
+  </head>
+  <body>
+    <div class='form-group' style="margin-top: 100px; width : 600px; margin-left : 25%;">
+	 <h1>Google recaptcha using Node.js</h1>   
+	<form id="comment_form" action='/submit' method="post">
+      <input type="email" placeholder="Type your email" size="40"><br><br>
+      <textarea name="comment" rows="8" cols="39"></textarea><br><br>
+      <div class="g-recaptcha" data-sitekey="6LeTyCUTAAAAAG-ht4IBlpkI9k7K2Z7S9CVxKcsv"></div><br>
+      <input type="submit" name="submit" value="Post comment"><br><br>
+    </form>
+  </div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
+  <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js'></script>
+  <script>
+    $(document).ready(function() {
+      $('#comment_form').submit(function() {
+        $(this).ajaxSubmit({
+          error: function(xhr) {
+            status('Error: ' + xhr.status);
+          },
+         success: function(response) {
+           alert(response.responseDesc);
+         }
+        });
+        //Very important line, it disable the page refresh.
+        return false;
+      });
+    });
+  </script>
+  </body>  
+</html>
